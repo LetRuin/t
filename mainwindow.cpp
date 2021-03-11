@@ -17,11 +17,16 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    /*
         db.setHostName("mysql60.hostland.ru");
         db.setDatabaseName("host1323541_irkutsk0");
         db.setUserName("host1323541_itstep");
         db.setPassword("269f43dc");
-        bool ok = db.open();
+    */
+
+    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=mysql60.hostland.ru;Database=host1323541_irkutsk0;Uid=host1323541_itstep;Port=3306;Pwd=269f43dc");
+
+    bool ok = db.open();
 
         if (ok) {
             QMessageBox msg;
