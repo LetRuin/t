@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
 }
 
@@ -16,27 +17,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    /*
-        db.setHostName("mysql60.hostland.ru");
-        db.setDatabaseName("host1323541_irkutsk0");
-        db.setUserName("host1323541_itstep");
-        db.setPassword("269f43dc");
-    */
+    db.DataBaseAddContactTable(ui->lineEdit_Firstname->text(),ui->lineEdit_Lastname->text(),ui->lineEdit_Patronymic->text());
+}
 
-    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=mysql60.hostland.ru;Database=host1323541_irkutsk0;Uid=host1323541_itstep;Port=3306;Pwd=269f43dc");
+void MainWindow::on_tableView_activated(const QModelIndex &index)
+{
 
-    bool ok = db.open();
-
-        if (ok) {
-            QMessageBox msg;
-            msg.setText("УРА! Мы подключились.");
-            msg.setIcon(QMessageBox::Information);
-            msg.exec();
-        } else {
-            QMessageBox msg;
-            msg.setText("Увы.. Мы не подключились.");
-            msg.setIcon(QMessageBox::Critical);
-            msg.exec();
-        }
+    db.DataBaseReqvestTable();
 }
